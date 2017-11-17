@@ -8,6 +8,11 @@ public class Device {
     private String mDeviceName;
     private String mDeviceInfo;
 
+    public Device(String name, String type) {
+        mDeviceInfo = type;
+        mDeviceName = name;
+    }
+
     public String getName() {
         return mDeviceName;
     }
