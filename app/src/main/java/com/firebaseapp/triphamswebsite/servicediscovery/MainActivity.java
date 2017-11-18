@@ -6,6 +6,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,45 +21,18 @@ import java.util.Locale;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
+import javax.jmdns.ServiceInfo;
 import javax.jmdns.ServiceListener;
 import javax.jmdns.ServiceTypeListener;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getName();
-    public class ServiceListener implements javax.jmdns.ServiceListener, ServiceTypeListener {
-
-        @Override
-        public void serviceAdded(ServiceEvent event) {
-            jmdns.requestServiceInfo(event.getType(),
-                    event.getName(), 1000);
-
-        }
-
-
-
-        @Override
-        public void serviceRemoved(ServiceEvent event) {
-
-        }
-
-        @Override
-        public void serviceResolved(ServiceEvent event) {
-            Device device = new Device(event.getName(), event.getType());
-
-            Log.d(TAG, "Service resolved Name: "  + event.getName());
-            Log.d(TAG, "Service resolved Type: " + event.getType());
-            MainActivity.this.addDeviceToDataSet(device);
-        }
+    public class AllTypeServiceListerner implements ServiceTypeListener {
 
         @Override
         public void serviceTypeAdded(ServiceEvent event) {
-            Device device = new Device(event.getName(), event.getType());
-            Log.d(TAG, "Service added Name: "  + event.getName());
-            Log.d(TAG, "Service added Type: " + event.getType());
-            jmdns.requestServiceInfo(event.getType(),
-                    event.getName(), 1000);
-            MainActivity.this.addDeviceToDataSet(device);
+            jmdns.addServiceListener(event.getType(), new ServiceLister());
         }
 
         @Override
@@ -67,9 +41,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void addDeviceToDataSet(Device device) {
-        mDeviceList.add(device);
-        mDeviceAdapter.notifyDataSetChanged();
+    public class ServiceLister implements javax.jmdns.ServiceListener {
+
+        @Override
+        public void serviceAdded(ServiceEvent event) {
+            jmdns.requestServiceInfo(event.getType(), event.getName());
+        }
+
+        @Override
+        public void serviceRemoved(ServiceEvent event) {
+
+        }
+
+        @Override
+        public void serviceResolved(ServiceEvent event) {
+            MainActivity.this.addDeviceToDataSet(event.getInfo());
+        }
+    }
+
+    private void addDeviceToDataSet(ServiceInfo serviceInfo) {
+        mDeviceList.add(serviceInfo);
+        mDeviceAdapter.notifyItemInserted(mDeviceList.size() - 1);
     }
 
     /****************************************************
@@ -78,13 +70,13 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mDeviceListRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private DeviceAdapter mDeviceAdapter;
-    private List<Device> mDeviceList;
+    private List<ServiceInfo> mDeviceList;
 
     /* Multi-cast lock*/
     private android.net.wifi.WifiManager.MulticastLock lock;
 
     private JmDNS jmdns = null;
-    private ServiceListener listener = null;
+    private ServiceTypeListener listener = null;
 
     @Override
     protected void onStart() {
@@ -99,8 +91,11 @@ public class MainActivity extends AppCompatActivity {
 
         mDeviceListRecyclerView = (RecyclerView) findViewById(R.id.rv_device_list);
 
+
         mLayoutManager = new LinearLayoutManager(this);
         mDeviceListRecyclerView.setLayoutManager(mLayoutManager);
+        mDeviceListRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
 
         mDeviceList = new ArrayList<>();
         mDeviceAdapter = new DeviceAdapter(mDeviceList);
@@ -164,11 +159,9 @@ public class MainActivity extends AppCompatActivity {
                     String hostname = addr.getHostName();
                     lock.acquire();
                     jmdns = JmDNS.create(addr, hostname);
-                    listener = new ServiceListener();
+                    listener = new AllTypeServiceListerner();
 
                     jmdns.addServiceTypeListener(listener);
-
-
                 } catch (IOException e) {
                     e.printStackTrace();
                     return;

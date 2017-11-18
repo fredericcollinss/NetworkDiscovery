@@ -2,12 +2,18 @@ package com.firebaseapp.triphamswebsite.servicediscovery;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.net.Inet4Address;
+import java.net.Inet6Address;
+import java.net.InetAddress;
 import java.util.List;
+
+import javax.jmdns.ServiceInfo;
 
 /**
  * Created by phamm on 11/16/2017.
@@ -15,9 +21,9 @@ import java.util.List;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder> {
 
-    private List<Device> mDeviceList;
+    private List<ServiceInfo> mDeviceList;
 
-    public DeviceAdapter(List<Device> deviceList) {
+    public DeviceAdapter(List<ServiceInfo> deviceList) {
         mDeviceList = deviceList;
     }
 
@@ -49,9 +55,21 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
             mDeviceInfoTextView = (TextView) itemView.findViewById(R.id.tv_device_info);
         }
 
-        public void bindView(Device device) {
-            mDeviceNameTextView.setText(device.getName());
-            mDeviceInfoTextView.setText(device.getInfo());
+        public void bindView(ServiceInfo info) {
+            mDeviceNameTextView.setText("Device name: " + info.getName());
+            StringBuilder sb = new StringBuilder();
+            InetAddress[] addresses = info.getInetAddresses();
+            for (InetAddress address : addresses) {
+                sb.append(address).append(':').append(info.getPort()).append(' ');
+            }
+            String[] urls = info.getURLs();
+            StringBuilder urlSB = new StringBuilder();
+
+            for(String url: urls) {
+                urlSB.append(url + "\n");
+            }
+            mDeviceInfoTextView.setText("IP addresses: " + sb.toString() + "\n"
+                        +"URL: " + urlSB.toString());
         }
     }
 }
