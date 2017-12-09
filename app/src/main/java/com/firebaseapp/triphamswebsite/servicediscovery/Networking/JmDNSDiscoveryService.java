@@ -56,14 +56,16 @@ public class JmDNSDiscoveryService extends DiscoveryService {
     private JmDNSDiscoveryService() {
     }
 
-    @Override
-    public DiscoveryService getServiceInstance(Context context) {
+
+    public static DiscoveryService getServiceInstance(Context context) {
         if (mServiceInstance == null) {
             mServiceInstance = new JmDNSDiscoveryService();
             ((JmDNSDiscoveryService) mServiceInstance).setup(context);
+            return mServiceInstance;
+        }else {
+            return mServiceInstance;
         }
 
-        return mServiceInstance;
     }
 
     @Override

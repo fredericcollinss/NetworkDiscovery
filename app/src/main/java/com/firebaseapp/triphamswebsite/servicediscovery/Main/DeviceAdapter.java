@@ -45,29 +45,26 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
     public static class DeviceViewHolder extends RecyclerView.ViewHolder{
 
         public TextView mDeviceNameTextView;
-        public TextView mDeviceInfoTextView;
+        public TextView mDeviceIpTextView;
+        public TextView mDevicePortTextView;
 
         public DeviceViewHolder(View itemView) {
             super(itemView);
-            mDeviceNameTextView = (TextView) itemView.findViewById(R.id.tv_device_name);
-            mDeviceInfoTextView = (TextView) itemView.findViewById(R.id.tv_device_info);
+            mDeviceNameTextView = itemView.findViewById(R.id.tv_device_name);
+            mDeviceIpTextView = itemView.findViewById(R.id.tv_device_ip);
+            mDevicePortTextView = itemView.findViewById(R.id.tv_device_port);
         }
 
         public void bindView(ServiceInfo info) {
-            mDeviceNameTextView.setText("Device name: " + info.getName());
-            StringBuilder sb = new StringBuilder();
-            InetAddress[] addresses = info.getInetAddresses();
-            for (InetAddress address : addresses) {
-                sb.append(address).append(':').append(info.getPort()).append(' ');
-            }
-            String[] urls = info.getURLs();
-            StringBuilder urlSB = new StringBuilder();
+            if(info != null) {
+                String name = info.getName() == null ? "Unknown name" : info.getName();
+                String ipAddress = info.getInet4Addresses().length > 0 ? String.valueOf(info.getInet4Addresses()[0]) : "Unknown IP address";
+                String port = String.valueOf(info.getPort());
 
-            for(String url: urls) {
-                urlSB.append(url + "\n");
+                mDeviceNameTextView.setText("Device name: " + info.getName());
+                mDeviceIpTextView.setText("IP address: " + info.getInet4Addresses()[0]);
+                mDevicePortTextView.setText("Port: " + String.valueOf(info.getPort()));
             }
-            mDeviceInfoTextView.setText("IP addresses: " + sb.toString() + "\n"
-                        +"URL: " + urlSB.toString());
         }
     }
 }

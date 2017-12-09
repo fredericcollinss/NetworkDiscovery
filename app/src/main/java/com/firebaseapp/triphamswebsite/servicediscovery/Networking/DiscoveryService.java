@@ -8,11 +8,9 @@ import android.content.Context;
 
 public abstract class DiscoveryService {
 
-    protected DiscoveryService mServiceInstance;
+    protected static DiscoveryService mServiceInstance;
 
     protected DiscoveryService() {}
-
-    public abstract DiscoveryService getServiceInstance(Context context);
 
     public abstract void registerServiceListener(NetworkServiceListener listener);
 

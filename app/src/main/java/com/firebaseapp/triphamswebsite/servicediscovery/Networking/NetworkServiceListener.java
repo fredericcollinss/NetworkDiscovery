@@ -7,7 +7,7 @@ import javax.jmdns.ServiceInfo;
  * Created by phamm on 12/8/2017.
  */
 
-interface NetworkServiceListener {
+public interface NetworkServiceListener {
     void onServiceResolved(ServiceEvent event);
     void onServiceRemove(ServiceEvent event);
 }
