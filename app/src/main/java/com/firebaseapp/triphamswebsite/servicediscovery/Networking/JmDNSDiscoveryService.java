@@ -4,8 +4,6 @@ import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
-import com.firebaseapp.triphamswebsite.servicediscovery.Main.MainActivity;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -25,7 +23,7 @@ public class JmDNSDiscoveryService extends DiscoveryService {
     /* Multi-cast lock*/
     private android.net.wifi.WifiManager.MulticastLock lock;
     private NetworkServiceListener mServiceListenerCallback;
-    private JmDNS mJmDNS;
+    private static JmDNS mJmDNS;
     private ServiceTypeListener mServiceTypeListener = new ServiceTypeListener() {
         @Override
         public void serviceTypeAdded(ServiceEvent event) {
@@ -61,10 +59,11 @@ public class JmDNSDiscoveryService extends DiscoveryService {
     @Override
     public DiscoveryService getServiceInstance(Context context) {
         if (mServiceInstance == null) {
-            return new JmDNSDiscoveryService();
-        } else {
-            return mServiceInstance;
+            mServiceInstance = new JmDNSDiscoveryService();
+            ((JmDNSDiscoveryService) mServiceInstance).setup(context);
         }
+
+        return mServiceInstance;
     }
 
     @Override

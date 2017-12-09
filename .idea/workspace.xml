@@ -52,7 +52,7 @@
             <entry file="file://$PROJECT_DIR$/app/src/main/java/com/firebaseapp/triphamswebsite/servicediscovery/Main/MainActivity.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="837">
-                  <caret line="172" column="19" lean-forward="true" selection-start-line="130" selection-start-column="7" selection-end-line="172" selection-end-column="19" />
+                  <caret line="172" column="19" lean-forward="false" selection-start-line="130" selection-start-column="7" selection-end-line="172" selection-end-column="19" />
                   <folding>
                     <element signature="e#1803#2018#0" expanded="true" />
                     <element signature="e#2017#2018#0" expanded="true" />
@@ -64,12 +64,12 @@
           <file leaf-file-name="JmDNSDiscoveryService.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/src/main/java/com/firebaseapp/triphamswebsite/servicediscovery/Networking/JmDNSDiscoveryService.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1849">
-                  <caret line="94" column="23" lean-forward="false" selection-start-line="94" selection-start-column="23" selection-end-line="94" selection-end-column="23" />
+                <state relative-caret-position="257">
+                  <caret line="65" column="32" lean-forward="false" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#2655#4635#0" expanded="true" />
-                    <element signature="e#4634#4635#0" expanded="true" />
+                    <element signature="e#2709#4689#0" expanded="true" />
+                    <element signature="e#4688#4689#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -89,7 +89,7 @@
             <entry file="file://$PROJECT_DIR$/app/src/main/java/com/firebaseapp/triphamswebsite/servicediscovery/Networking/NetworkServiceListener.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="220">
-                  <caret line="10" column="47" lean-forward="true" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+                  <caret line="10" column="47" lean-forward="false" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -104,8 +104,8 @@
           <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/src/main/java/com/firebaseapp/triphamswebsite/servicediscovery/Main/MainActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2002">
-                  <caret line="32" column="12" lean-forward="true" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="75" />
+                <state relative-caret-position="-1848">
+                  <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
                   <folding>
                     <element signature="e#3808#5821#0" expanded="true" />
                     <element signature="e#5820#5821#0" expanded="true" />
@@ -2045,7 +2045,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512796612276" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512797079550" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2093,7 +2093,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512796612276" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512797079550" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2276,7 +2276,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512796612278" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512797079551" />
       </method>
     </configuration>
     <list size="1">
@@ -2383,17 +2383,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/firebaseapp/triphamswebsite/servicediscovery/Main/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="837">
-          <caret line="172" column="19" lean-forward="true" selection-start-line="130" selection-start-column="7" selection-end-line="172" selection-end-column="19" />
-          <folding>
-            <element signature="e#1803#2018#0" expanded="true" />
-            <element signature="e#2017#2018#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/firebaseapp/triphamswebsite/servicediscovery/Networking/DiscoveryService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -2405,21 +2394,32 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/firebaseapp/triphamswebsite/servicediscovery/Networking/NetworkServiceListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
-          <caret line="10" column="47" lean-forward="true" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+          <caret line="10" column="47" lean-forward="false" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/firebaseapp/triphamswebsite/servicediscovery/Main/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="837">
+          <caret line="172" column="19" lean-forward="false" selection-start-line="130" selection-start-column="7" selection-end-line="172" selection-end-column="19" />
+          <folding>
+            <element signature="e#1803#2018#0" expanded="true" />
+            <element signature="e#2017#2018#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/firebaseapp/triphamswebsite/servicediscovery/Networking/JmDNSDiscoveryService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1849">
-          <caret line="94" column="23" lean-forward="false" selection-start-line="94" selection-start-column="23" selection-end-line="94" selection-end-column="23" />
+        <state relative-caret-position="257">
+          <caret line="65" column="32" lean-forward="false" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2655#4635#0" expanded="true" />
-            <element signature="e#4634#4635#0" expanded="true" />
+            <element signature="e#2709#4689#0" expanded="true" />
+            <element signature="e#4688#4689#0" expanded="true" />
           </folding>
         </state>
       </provider>
