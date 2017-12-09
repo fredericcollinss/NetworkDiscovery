@@ -1,6 +1,5 @@
-package com.firebaseapp.triphamswebsite.servicediscovery;
+package com.firebaseapp.triphamswebsite.servicediscovery.Main;
 
-import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -9,8 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.AbsListView;
+
+import com.firebaseapp.triphamswebsite.servicediscovery.R;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -22,7 +21,6 @@ import java.util.Locale;
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceInfo;
-import javax.jmdns.ServiceListener;
 import javax.jmdns.ServiceTypeListener;
 
 public class MainActivity extends AppCompatActivity {
@@ -59,9 +57,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void addDeviceToDataSet(ServiceInfo serviceInfo) {
-        mDeviceList.add(serviceInfo);
-        mDeviceAdapter.notifyItemInserted(mDeviceList.size() - 1);
+    private void addDeviceToDataSet(final ServiceInfo serviceInfo) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mDeviceList.add(serviceInfo);
+                mDeviceAdapter.notifyItemInserted(mDeviceList.size() - 1);
+            }
+        });
+
     }
 
     /****************************************************

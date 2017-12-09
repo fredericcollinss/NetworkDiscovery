@@ -1,15 +1,13 @@
-package com.firebaseapp.triphamswebsite.servicediscovery;
+package com.firebaseapp.triphamswebsite.servicediscovery.Main;
 
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.Adapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.net.Inet4Address;
-import java.net.Inet6Address;
+import com.firebaseapp.triphamswebsite.servicediscovery.R;
+
 import java.net.InetAddress;
 import java.util.List;
 
