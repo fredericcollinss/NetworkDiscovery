@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
         mDeviceListRecyclerView.setLayoutManager(mLayoutManager);
         mDeviceListRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-
         mDeviceList = new ArrayList<>();
         mDeviceAdapter = new DeviceAdapter(mDeviceList);
         mDeviceListRecyclerView.setAdapter(mDeviceAdapter);

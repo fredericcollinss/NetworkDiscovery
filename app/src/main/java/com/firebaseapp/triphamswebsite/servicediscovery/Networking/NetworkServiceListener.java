@@ -1,5 +1,6 @@
 package com.firebaseapp.triphamswebsite.servicediscovery.Networking;
 
+import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceInfo;
 
 /**
@@ -7,5 +8,6 @@ import javax.jmdns.ServiceInfo;
  */
 
 interface NetworkServiceListener {
-    void onServiceResolved(ServiceInfo serviceInfo);
+    void onServiceResolved(ServiceEvent event);
+    void onServiceRemove(ServiceEvent event);
 }

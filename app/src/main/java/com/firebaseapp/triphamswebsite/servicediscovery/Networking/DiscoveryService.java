@@ -17,4 +17,6 @@ public abstract class DiscoveryService {
     public abstract void registerServiceListener(NetworkServiceListener listener);
 
     public abstract void unregisterServiceListener(NetworkServiceListener listener);
+
+    public abstract void close();
 }
