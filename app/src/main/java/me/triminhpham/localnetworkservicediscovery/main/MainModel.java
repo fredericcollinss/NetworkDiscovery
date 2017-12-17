@@ -40,7 +40,6 @@ public class MainModel implements MainMvp.Model {
         @Override
         public void serviceTypeAdded(ServiceEvent event) {
             mJmDNS.addServiceListener(event.getType(), mServiceListener);
-
         }
 
         @Override
@@ -63,25 +62,35 @@ public class MainModel implements MainMvp.Model {
 
         @Override
         public void serviceResolved(ServiceEvent event) {
+            Log.i(TAG, "Name: " + event.getName() + " with type: " + event.getType());
             boolean serviceAdded = MainModel.this.addServiceInfo(event);
-            if(serviceAdded) {
+            if (serviceAdded) {
                 // notify mServiceListenerCallback
             }
         }
     };
 
-    private ServiceListenerCallback mServiceFoundListener;
+    private MainMvp.Presenter mPresenterCallback = null;
 
+    /**
+     * Construct a MainModel
+     *
+     * @param applicationContext The application context to construct MainModel
+     * @param serviceInfoStorage A List<LocalServiceInfo> that can be used to stored found services
+     */
     public MainModel(Context applicationContext,
-                     ServiceListenerCallback listener,
-                     List<LocalServiceInfo> serviceInfoStorage)
-    {
+                     List<LocalServiceInfo> serviceInfoStorage) {
         mServiceInfoList = serviceInfoStorage;
-        mServiceFoundListener = listener;
         setup(applicationContext);
     }
 
+    /**
+     * Setup the model
+     *
+     * @param context a Context object that can be used to initialize the model with
+     */
     private void setup(final Context context) {
+        // Construct the model in another thread
         new Thread(new Runnable() {
 
             @Override
@@ -141,6 +150,11 @@ public class MainModel implements MainMvp.Model {
 
 
     @Override
+    public void setPresenterCallback(MainMvp.Presenter presenterCallback) {
+
+    }
+
+    @Override
     public void close() {
 
     }
@@ -160,7 +174,7 @@ public class MainModel implements MainMvp.Model {
      */
     private boolean addServiceInfo(ServiceEvent event) {
 
-        if(event.getInfo().getInetAddresses().length == 0) {
+        if (event.getInfo().getInetAddresses().length == 0) {
             return false;
         }
 
@@ -169,7 +183,7 @@ public class MainModel implements MainMvp.Model {
         int servicePort = event.getInfo().getPort();
 
         LocalServiceInfo info = new LocalServiceInfo(serviceName, serviceAddress, servicePort);
-        if(!hasServiceInfo(info)) {
+        if (!hasServiceInfo(info)) {
             return true;
         }
 

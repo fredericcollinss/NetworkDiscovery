@@ -10,24 +10,51 @@ import me.triminhpham.localnetworkservicediscovery.data.LocalServiceInfo;
 
 public interface MainMvp {
     interface View {
+        void showServiceList(List<LocalServiceInfo> services);
 
+        void showService(LocalServiceInfo serviceInfo);
     }
 
     interface Presenter {
+        /**
+         * Callback to be called when a new service is found
+         *
+         * @param serviceInfo LocalServiceInfor that contains information
+         *                    of the newly discovered service
+         */
+        void onServiceFound(LocalServiceInfo serviceInfo);
 
+        /**
+         * Callback to be called when a service has been removed
+         *
+         * @param serviceInfo LocalServiceInfo that contains information
+         *                    of removed service
+         */
+        void onServiceRemove(LocalServiceInfo serviceInfo);
+
+        /**
+         * Set the model
+         *
+         * @param model model to be set
+         */
+        void setModel(MainMvp.Model model);
+
+        /**
+         * Set view
+         *
+         * @param view new view
+         */
+        void setView(MainMvp.View view);
     }
 
     interface Model {
 
         /**
-         * This interface must be implemented by any class that wants
-         * to be notify about service events emits by MainMvp.Model
+         * Set the presenter callback entity that can be called when something changes to the model
+         *
+         * @param presenterCallback presenter listener
          */
-        interface ServiceListenerCallback {
-            void onServiceFound(LocalServiceInfo serviceInfo);
-
-            void onServiceRemove(LocalServiceInfo serviceInfo);
-        }
+        void setPresenterCallback(MainMvp.Presenter presenterCallback);
 
         /**
          * Call to release any resource used by the model
