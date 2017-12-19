@@ -70,7 +70,7 @@ public class MainModel implements MainMvp.Model {
             LocalServiceInfo info = new LocalServiceInfo(serviceName, serviceAddress, servicePort);
             if (!hasServiceInfo(info)) {
                 mServiceInfoList.add(info);
-                mPresenterCallback.onServiceFound(info);
+                mPresenterCallback.onServiceFound(mServiceInfoList.size() - 1);
             }
         }
     };
@@ -81,11 +81,9 @@ public class MainModel implements MainMvp.Model {
      * Construct a MainModel
      *
      * @param applicationContext The application context to construct MainModel
-     * @param serviceInfoStorage A List<LocalServiceInfo> that can be used to stored found services
      */
-    public MainModel(Context applicationContext,
-                     List<LocalServiceInfo> serviceInfoStorage) {
-        mServiceInfoList = serviceInfoStorage;
+    public MainModel(Context applicationContext) {
+        mServiceInfoList = new ArrayList<>();
         setup(applicationContext);
     }
 
@@ -168,31 +166,6 @@ public class MainModel implements MainMvp.Model {
     public List<LocalServiceInfo> getDeviceList() {
         // Note: This returns a reference to mServiceInfoList (Bad encapsulation)
         return mServiceInfoList;
-    }
-
-    /**
-     * Add service event to local device list.
-     *
-     * @param event the event to be added
-     * @return true if a new service info was added to the model, false otherwise
-     */
-    private boolean addServiceInfo(ServiceEvent event) {
-
-        if (event.getInfo().getInetAddresses().length == 0) {
-            return false;
-        }
-
-        String serviceName = event.getName();
-        InetAddress serviceAddress = event.getInfo().getInetAddresses()[0];
-        int servicePort = event.getInfo().getPort();
-
-        LocalServiceInfo info = new LocalServiceInfo(serviceName, serviceAddress, servicePort);
-        if (!hasServiceInfo(info)) {
-            mServiceInfoList.add(info);
-            return true;
-        }
-
-        return false;
     }
 
     /**

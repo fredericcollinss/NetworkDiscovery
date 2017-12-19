@@ -1,23 +1,17 @@
 package me.triminhpham.localnetworkservicediscovery.main;
 
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.triminhpham.localnetworkservicediscovery.R;
-import me.triminhpham.localnetworkservicediscovery.data.LocalServiceInfo;
 
 public class MainActivity extends AppCompatActivity implements MainMvp.View {
     public static final String TAG = MainActivity.class.getSimpleName();
-    private List<LocalServiceInfo> mLocalServiceInfoList = new ArrayList<>();
     private ServiceAdapter mServiceAdapter;
     @BindView(R.id.rv_service_list) RecyclerView mRecyclerView;
 
@@ -26,11 +20,11 @@ public class MainActivity extends AppCompatActivity implements MainMvp.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainModel model = new MainModel(getApplicationContext(), mLocalServiceInfoList);
+        MainModel model = new MainModel(getApplicationContext());
         MainMvp.Presenter presenter = new MainPresenter(this, model);
         model.setPresenterCallback(presenter);
 
-        mServiceAdapter = new ServiceAdapter(mLocalServiceInfoList);
+        mServiceAdapter = new ServiceAdapter(presenter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         ButterKnife.bind(this);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -41,23 +35,21 @@ public class MainActivity extends AppCompatActivity implements MainMvp.View {
         mRecyclerView.addItemDecoration(decoration);
     }
 
+
     @Override
-    public void showServiceList(List<LocalServiceInfo> services) {
+    public void showService(final int position) {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                // TODO This is not efficient, must be optimized later
                 mServiceAdapter.notifyDataSetChanged();
             }
         });
-    }
-
-    @Override
-    public void showService(LocalServiceInfo serviceInfo) {
 
     }
 
     @Override
-    public void removeService(LocalServiceInfo serviceInfo) {
-
+    public void removeService(int position) {
+        mServiceAdapter.notifyItemRemoved(position);
     }
 }

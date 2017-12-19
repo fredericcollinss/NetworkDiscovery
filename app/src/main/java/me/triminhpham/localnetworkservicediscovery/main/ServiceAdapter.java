@@ -54,10 +54,12 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         }
     }
 
-    private List<LocalServiceInfo> mServiceInfoList;
+    private MainMvp.Presenter mPresenter;
+    private List<LocalServiceInfo> mLocalServiceInfoList;
 
-    public ServiceAdapter(List<LocalServiceInfo> localServiceInfoList) {
-        mServiceInfoList = localServiceInfoList;
+    public ServiceAdapter(MainMvp.Presenter presenter) {
+        mPresenter = presenter;
+        mLocalServiceInfoList = presenter.getServiceList();
     }
 
     @Override
@@ -69,11 +71,11 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
 
     @Override
     public void onBindViewHolder(ServiceViewHolder holder, int position) {
-        holder.bindView(mServiceInfoList.get(position));
+        holder.bindView(mLocalServiceInfoList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mServiceInfoList.size();
+        return mLocalServiceInfoList.size();
     }
 }

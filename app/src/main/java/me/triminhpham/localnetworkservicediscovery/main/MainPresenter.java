@@ -1,5 +1,7 @@
 package me.triminhpham.localnetworkservicediscovery.main;
 
+import java.util.List;
+
 import me.triminhpham.localnetworkservicediscovery.data.LocalServiceInfo;
 
 /**
@@ -27,14 +29,14 @@ public class MainPresenter implements MainMvp.Presenter {
     }
 
     @Override
-    public void onServiceFound(LocalServiceInfo serviceInfo) {
+    public void onServiceFound(int position) {
         //mView.showService(serviceInfo);
-        mView.showServiceList(mModel.getDeviceList());
+        mView.showService(position);
     }
 
     @Override
-    public void onServiceRemove(LocalServiceInfo serviceInfo) {
-        mView.removeService(serviceInfo);
+    public void onServiceRemove(int position) {
+        mView.removeService(position);
     }
 
     @Override
@@ -45,6 +47,10 @@ public class MainPresenter implements MainMvp.Presenter {
     @Override
     public void setView(MainMvp.View view) {
         mView = view;
-        view.showServiceList(mModel.getDeviceList());
+    }
+
+    @Override
+    public List<LocalServiceInfo> getServiceList() {
+        return mModel.getDeviceList();
     }
 }

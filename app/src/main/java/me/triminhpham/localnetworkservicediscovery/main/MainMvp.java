@@ -11,44 +11,36 @@ import me.triminhpham.localnetworkservicediscovery.data.LocalServiceInfo;
 public interface MainMvp {
     interface View {
         /**
-         * Display list of services
-         *
-         * @param services list of services to be displayed
-         */
-        void showServiceList(List<LocalServiceInfo> services);
-
-
-        /**
          * Display a new services
          *
-         * @param serviceInfo service to be display
+         * @param position service to be display
          */
-        void showService(LocalServiceInfo serviceInfo);
+        void showService(int position);
 
         /**
          * Remove a service from the view
          *
-         * @param serviceInfo service to be removed
+         * @param position service to be removed
          */
-        void removeService(LocalServiceInfo serviceInfo);
+        void removeService(int position);
     }
 
     interface Presenter {
         /**
          * Callback to be called when a new service is found
          *
-         * @param serviceInfo LocalServiceInfor that contains information
+         * @param position LocalServiceInfor that contains information
          *                    of the newly discovered service
          */
-        void onServiceFound(LocalServiceInfo serviceInfo);
+        void onServiceFound(int position);
 
         /**
          * Callback to be called when a service has been removed
          *
-         * @param serviceInfo LocalServiceInfo that contains information
+         * @param position LocalServiceInfo that contains information
          *                    of removed service
          */
-        void onServiceRemove(LocalServiceInfo serviceInfo);
+        void onServiceRemove(int position);
 
         /**
          * Set the model
@@ -63,6 +55,8 @@ public interface MainMvp {
          * @param view new view
          */
         void setView(MainMvp.View view);
+
+        List<LocalServiceInfo> getServiceList();
     }
 
     interface Model {
