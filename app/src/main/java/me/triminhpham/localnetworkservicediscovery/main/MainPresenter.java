@@ -3,9 +3,13 @@ package me.triminhpham.localnetworkservicediscovery.main;
 import me.triminhpham.localnetworkservicediscovery.data.LocalServiceInfo;
 
 /**
- * Created by tripham on 12/17/17.
+ * Created by Tri Pham on 12/17/17.
  */
 
+/**
+ * A presenter that handles the user input passed from view
+ * It also makes sure that the data got from model is well formatted
+ */
 public class MainPresenter implements MainMvp.Presenter {
 
     private MainMvp.View mView;
@@ -22,13 +26,15 @@ public class MainPresenter implements MainMvp.Presenter {
         mModel = model;
     }
 
+    @Override
     public void onServiceFound(LocalServiceInfo serviceInfo) {
-
+        //mView.showService(serviceInfo);
+        mView.showServiceList(mModel.getDeviceList());
     }
 
     @Override
     public void onServiceRemove(LocalServiceInfo serviceInfo) {
-
+        mView.removeService(serviceInfo);
     }
 
     @Override
@@ -39,5 +45,6 @@ public class MainPresenter implements MainMvp.Presenter {
     @Override
     public void setView(MainMvp.View view) {
         mView = view;
+        view.showServiceList(mModel.getDeviceList());
     }
 }

@@ -10,9 +10,27 @@ import me.triminhpham.localnetworkservicediscovery.data.LocalServiceInfo;
 
 public interface MainMvp {
     interface View {
+        /**
+         * Display list of services
+         *
+         * @param services list of services to be displayed
+         */
         void showServiceList(List<LocalServiceInfo> services);
 
+
+        /**
+         * Display a new services
+         *
+         * @param serviceInfo service to be display
+         */
         void showService(LocalServiceInfo serviceInfo);
+
+        /**
+         * Remove a service from the view
+         *
+         * @param serviceInfo service to be removed
+         */
+        void removeService(LocalServiceInfo serviceInfo);
     }
 
     interface Presenter {

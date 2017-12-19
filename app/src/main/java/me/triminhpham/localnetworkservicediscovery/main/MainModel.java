@@ -1,9 +1,5 @@
 package me.triminhpham.localnetworkservicediscovery.main;
 
-/**
- * Created on 12/16/2017.
- */
-
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -63,9 +59,18 @@ public class MainModel implements MainMvp.Model {
         @Override
         public void serviceResolved(ServiceEvent event) {
             Log.i(TAG, "Name: " + event.getName() + " with type: " + event.getType());
-            boolean serviceAdded = MainModel.this.addServiceInfo(event);
-            if (serviceAdded) {
-                // notify mServiceListenerCallback
+            if (event.getInfo().getInetAddresses().length == 0) {
+                return;
+            }
+
+            String serviceName = event.getName();
+            InetAddress serviceAddress = event.getInfo().getInetAddresses()[0];
+            int servicePort = event.getInfo().getPort();
+
+            LocalServiceInfo info = new LocalServiceInfo(serviceName, serviceAddress, servicePort);
+            if (!hasServiceInfo(info)) {
+                mServiceInfoList.add(info);
+                mPresenterCallback.onServiceFound(info);
             }
         }
     };
@@ -151,7 +156,7 @@ public class MainModel implements MainMvp.Model {
 
     @Override
     public void setPresenterCallback(MainMvp.Presenter presenterCallback) {
-
+        mPresenterCallback = presenterCallback;
     }
 
     @Override
@@ -161,9 +166,8 @@ public class MainModel implements MainMvp.Model {
 
     @Override
     public List<LocalServiceInfo> getDeviceList() {
-        List<LocalServiceInfo> copyList = new ArrayList<>();
-        copyList.addAll(mServiceInfoList);
-        return copyList;
+        // Note: This returns a reference to mServiceInfoList (Bad encapsulation)
+        return mServiceInfoList;
     }
 
     /**
@@ -184,6 +188,7 @@ public class MainModel implements MainMvp.Model {
 
         LocalServiceInfo info = new LocalServiceInfo(serviceName, serviceAddress, servicePort);
         if (!hasServiceInfo(info)) {
+            mServiceInfoList.add(info);
             return true;
         }
 

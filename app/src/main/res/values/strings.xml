@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">LocalNetworkServiceDiscovery</string>
+    <string name="app_name">Local Service Discovery</string>
+    <string name="ip_address_label">IP Address</string>
+    <string name="port_label">Port</string>
 </resources>
